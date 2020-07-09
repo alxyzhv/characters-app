@@ -54,6 +54,9 @@
 		EB86E55724B774450089AFB9 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		EB86E55B24B775D60089AFB9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		EB86E55E24B776CC0089AFB9 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		EB86E55F24B778390089AFB9 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		EB86E56024B778BE0089AFB9 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
+		EB86E56124B778E90089AFB9 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +179,11 @@
 		EB86E54424B76DA10089AFB9 /* Configuration Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB86E56124B778E90089AFB9 /* fastlane */,
 				EB86E54524B76DBA0089AFB9 /* .gitignore */,
 				EB86E55B24B775D60089AFB9 /* .swiftlint.yml */,
+				EB86E55F24B778390089AFB9 /* Gemfile */,
+				EB86E56024B778BE0089AFB9 /* Gemfile.lock */,
 				EB86E55E24B776CC0089AFB9 /* Makefile */,
 				EB86E55224B770640089AFB9 /* swiftgen.yml */,
 			);

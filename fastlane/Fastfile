@@ -1,0 +1,23 @@
+desc "Runs tests"
+lane :tests do
+    unit_tests
+    ui_tests
+end
+
+desc "Runs unit-tests"
+lane :unit_tests do
+  run_tests(
+    scheme: "CharactersTests",
+    device: "iPhone 11",
+    derived_data_path: "DerivedData"
+  )
+end
+
+desc "Runs ui-tests"
+lane :ui_tests do
+  run_tests(
+    scheme: "CharactersUITests",
+    device: "iPhone 11",
+    derived_data_path: "DerivedData"
+  )
+end
