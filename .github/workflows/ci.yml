@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Bundler cache
+        uses: actions/cache@v1
+        with:
+          path: .bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: ${{ runner.os }}-gem-
+      - name: Select xcode 11.5
+        run: sudo xcode-select -switch /Applications/Xcode_11.5.app
+
+      - name: Install dependencies
+        run: make init
+
+      - name: Run tests
+        run: make tests

@@ -3,7 +3,7 @@ init: deps project
 
 .PHONY: deps # Устанавливает и подготавливает зависимости для работы проекта
 deps:
-	bundle install --path .bundle
+	bundle install
 	-xattr -rd com.apple.quarantine .scripts
 
 .PHONY: project # Генерирует .xcodeproj с помощью xcodegen

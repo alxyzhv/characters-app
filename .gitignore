@@ -17,7 +17,7 @@ xcuserdata
 *.moved-aside
 
 # Bundler
-.bundle/
+.bundle/ruby
 
 # fastlane
 fastlane/report.xml
