@@ -1,0 +1,76 @@
+name: Characters
+type: Application
+
+options:
+    bundleIdPrefix: me.alxyzhv
+    developmentLanguage: ru
+    groupSortPosition: top
+    usesTabs: false
+    indentWidth: 4
+    tabWidth: 4
+    deploymentTarget:
+        iOS: 13.0
+
+fileGroups:
+    - .gitignore
+    - .swiftlint.yml
+    - Gemfile
+    - Makefile
+    - project.yml
+    - swiftgen.yml
+
+targets:
+    CharactersApp:
+        platform: iOS
+        type: application
+        sources: [App]
+
+        scheme:
+            gatherCoverageData: true
+            testTargets:
+            - name: UnitTests
+              parallelizable: true
+              randomExecutionOrder: true
+            
+            - name: UITests
+              parallelizable: true
+              randomExecutionOrder: true
+
+        preBuildScripts:
+            - name: Run SwiftGen
+              script: .scripts/swiftgen/bin/swiftgen
+
+            - name: Run SwiftLint
+              script: .scripts/swiftlint/swiftlint
+
+        settings:
+            base:
+                PRODUCT_NAME: CharactersApp
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters
+                TARGETED_DEVICE_FAMILY: 1
+
+    UnitTests:
+        platform: iOS
+        type: bundle.unit-test
+        sources: [UnitTests]
+        dependencies:
+            - target: CharactersApp
+        scheme:
+            testTargets:
+                - UnitTests
+        settings:
+            base:
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters.UnitTests
+
+    UITests:
+        platform: iOS
+        type: bundle.ui-testing
+        sources: [UITests]
+        dependencies:
+            - target: CharactersApp
+        scheme:
+            testTargets:
+                - UITests
+        settings:
+            base:
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters.UITests

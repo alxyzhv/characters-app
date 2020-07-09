@@ -1,7 +1,14 @@
-.PHONY: init # Запускает инициализацию проекта
-init:
+.PHONY: init # Запускает установку зависимостей и генерацию проектного файла
+init: deps project
+
+.PHONY: deps # Устанавливает и подготавливает зависимости для работы проекта
+deps:
 	bundle install --path .bundle
-	xattr -d com.apple.quarantine .scripts/*
+	-xattr -rd com.apple.quarantine .scripts
+
+.PHONY: project # Генерирует .xcodeproj с помощью xcodegen
+project:
+	.scripts/xcodegen/bin/xcodegen
 
 .PHONY: clean # Удаляет DerivedData
 clean:

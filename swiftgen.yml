@@ -1,11 +1,11 @@
 strings:
-    inputs: Characters/Resources/Strings/en.lproj/Localizable.strings
+    inputs: App/Resources/Strings/en.lproj/Localizable.strings
     outputs:
         templateName: structured-swift5
-        output: Characters/Resources/Generated/Strings.swift
+        output: App/Resources/Generated/Strings.swift
 
 xcassets:
-    inputs: Characters/Resources/Images
+    inputs: App/Resources/Images
     outputs:
         templateName: swift5
-        output: Characters/Resources/Generated/Images.swift
+        output: App/Resources/Generated/Images.swift
