@@ -1,5 +1,4 @@
 name: Characters
-type: Application
 
 options:
     bundleIdPrefix: me.alxyzhv
@@ -12,18 +11,24 @@ options:
         iOS: 13.0
 
 fileGroups:
+    - xcodegen
     - .gitignore
     - .swiftlint.yml
     - Gemfile
     - Makefile
-    - project.yml
     - swiftgen.yml
+
+projectReferences:
+    Core:
+        path: Core.xcodeproj
 
 targets:
     CharactersApp:
         platform: iOS
         type: application
         sources: [App]
+        dependencies:
+            - target: Core/Core
 
         scheme:
             gatherCoverageData: true
