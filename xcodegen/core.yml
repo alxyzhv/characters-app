@@ -1,0 +1,17 @@
+name: Core
+
+options:
+    bundleIdPrefix: me.alxyzhv
+    developmentLanguage: ru
+    groupSortPosition: top
+    usesTabs: false
+    indentWidth: 4
+    tabWidth: 4
+    deploymentTarget:
+        iOS: 13.0
+
+targets:
+    Core:
+        platform: iOS
+        type: library.static
+        sources: [Core]
