@@ -28,7 +28,7 @@ final public class Storage: IStorage {
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K = %@", T.identifierKey, identifier)
             let results = try? context.fetch(request)
-            let model = results?.first.flatMap { T.init(from: $0) }
+            let model = results?.first.flatMap(T.init)
             completion(model)
         }
     }
@@ -36,7 +36,7 @@ final public class Storage: IStorage {
     public func readAll<T: IStorage.Model>(_ type: T.Type, completion: @escaping ([T]) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let results = try? context.fetch(T.fetchRequest)
-            let models = results?.compactMap { T.init(from: $0) } ?? []
+            let models = results?.compactMap(T.init) ?? []
             completion(models)
         }
     }
@@ -48,7 +48,7 @@ final public class Storage: IStorage {
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K = %@", T.identifierKey, identifier)
             let results = try? context.fetch(request)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
@@ -58,7 +58,7 @@ final public class Storage: IStorage {
             defer { completion() }
 
             let results = try? context.fetch(T.fetchRequest)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
@@ -97,11 +97,11 @@ final public class Storage: IStorage {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
-            let identifiers = models.map { $0.identifier }
+            let identifiers = models.map(\.identifier)
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K IN %@", T.identifierKey, identifiers)
             let results = try? context.fetch(request)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
