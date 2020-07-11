@@ -18,6 +18,11 @@ fileGroups:
     - Makefile
     - swiftgen.yml
 
+settings:
+    base:
+        CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+
+
 projectReferences:
     Core:
         path: Core.xcodeproj

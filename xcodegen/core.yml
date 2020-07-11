@@ -2,7 +2,6 @@ name: Core
 
 options:
     bundleIdPrefix: me.alxyzhv
-    developmentLanguage: ru
     groupSortPosition: top
     usesTabs: false
     indentWidth: 4
