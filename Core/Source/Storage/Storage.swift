@@ -1,6 +1,6 @@
 import CoreData
 
-final public class CoreDataStorage: Storage {
+final public class Storage: IStorage {
 
     // MARK: - Properties
 
@@ -21,49 +21,49 @@ final public class CoreDataStorage: Storage {
         self.name = name
     }
 
-    // MARK: - Storage
+    // MARK: - IStorage
 
-    public func read<T: Storage.Model>(_ type: T.Type, by identifier: String, completion: @escaping (T?) -> Void) {
+    public func read<T: IStorage.Model>(_ type: T.Type, by identifier: String, completion: @escaping (T?) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K = %@", T.identifierKey, identifier)
             let results = try? context.fetch(request)
-            let model = results?.first.flatMap { T.init(from: $0) }
+            let model = results?.first.flatMap(T.init)
             completion(model)
         }
     }
 
-    public func readAll<T: Storage.Model>(_ type: T.Type, completion: @escaping ([T]) -> Void) {
+    public func readAll<T: IStorage.Model>(_ type: T.Type, completion: @escaping ([T]) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let results = try? context.fetch(T.fetchRequest)
-            let models = results?.compactMap { T.init(from: $0) } ?? []
+            let models = results?.compactMap(T.init) ?? []
             completion(models)
         }
     }
 
-    public func erase<T: Storage.Model>(_ type: T.Type, by identifier: String, completion: @escaping () -> Void) {
+    public func erase<T: IStorage.Model>(_ type: T.Type, by identifier: String, completion: @escaping () -> Void) {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K = %@", T.identifierKey, identifier)
             let results = try? context.fetch(request)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
 
-    public func eraseAll<T: Storage.Model>(_ type: T.Type, completion: @escaping () -> Void) {
+    public func eraseAll<T: IStorage.Model>(_ type: T.Type, completion: @escaping () -> Void) {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
             let results = try? context.fetch(T.fetchRequest)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
 
-    public func persist<T: Storage.Model>(_ model: T, completion: @escaping () -> Void) {
+    public func persist<T: IStorage.Model>(_ model: T, completion: @escaping () -> Void) {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
@@ -74,7 +74,7 @@ final public class CoreDataStorage: Storage {
         }
     }
 
-    public func persist<T: Storage.Model>(_ models: [T], completion: @escaping () -> Void) {
+    public func persist<T: IStorage.Model>(_ models: [T], completion: @escaping () -> Void) {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
@@ -89,19 +89,19 @@ final public class CoreDataStorage: Storage {
         }
     }
 
-    public func erase<T: Storage.Model>(_ model: T, completion: @escaping () -> Void) {
+    public func erase<T: IStorage.Model>(_ model: T, completion: @escaping () -> Void) {
         erase(T.self, by: model.identifier, completion: completion)
     }
 
-    public func erase<T: Storage.Model>(_ models: [T], completion: @escaping () -> Void) {
+    public func erase<T: IStorage.Model>(_ models: [T], completion: @escaping () -> Void) {
         persistentContainer.performBackgroundTask { context in
             defer { completion() }
 
-            let identifiers = models.map { $0.identifier }
+            let identifiers = models.map(\.identifier)
             let request = T.fetchRequest
             request.predicate = NSPredicate(format: "%K IN %@", T.identifierKey, identifiers)
             let results = try? context.fetch(request)
-            results?.forEach { context.delete($0) }
+            results?.forEach(context.delete)
             context.tryToSave()
         }
     }
