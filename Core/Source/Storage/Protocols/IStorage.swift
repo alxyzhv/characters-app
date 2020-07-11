@@ -1,4 +1,4 @@
-public protocol Storage {
+public protocol IStorage {
 
     typealias Model = Storable & Identified
 
