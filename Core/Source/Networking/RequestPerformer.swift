@@ -34,11 +34,8 @@ final public class RequestPerformer: IRequestPerfomer {
                     return completion(.failure(NetworkingError.emptyResponse))
                 }
 
-                do {
-                    completion(.success(try parser.parse(from: data)))
-                } catch {
-                    completion(.failure(error))
-                }
+                let result = Result { try parser.parse(from: data) }
+                completion(result)
             }
             dataTask.resume()
         } catch {
