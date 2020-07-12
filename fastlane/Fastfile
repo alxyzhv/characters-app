@@ -7,7 +7,7 @@ end
 desc "Runs unit-tests"
 lane :unit_tests do
   run_tests(
-    project: "Characters.xcodeproj",
+    project: "Heroes.xcodeproj",
     scheme: "UnitTests",
     device: "iPhone 11",
     derived_data_path: "DerivedData"
@@ -17,7 +17,7 @@ end
 desc "Runs ui-tests"
 lane :ui_tests do
   run_tests(
-    project: "Characters.xcodeproj",
+    project: "Heroes.xcodeproj",
     scheme: "UITests",
     device: "iPhone 11",
     derived_data_path: "DerivedData"
