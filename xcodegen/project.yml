@@ -13,6 +13,7 @@ options:
 fileGroups:
     - xcodegen
     - .gitignore
+    - .hound.yml
     - .swiftlint.yml
     - Gemfile
     - Makefile
