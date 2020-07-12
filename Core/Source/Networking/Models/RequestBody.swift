@@ -1,8 +1,12 @@
 import Foundation
 
+/// Тело запроса
 public enum RequestBody {
+
     case data(Data)
+
     case json([String: CustomStringConvertible])
+
     case string(String)
 
     /// Преобразовать тело запроса в Data
