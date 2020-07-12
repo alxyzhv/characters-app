@@ -1,7 +1,7 @@
 import XCTest
-@testable import CharactersApp
+@testable import HeroesApp
 
-final class CharactersTests: XCTestCase {
+final class HeroesTests: XCTestCase {
 
     func testExample() {
         XCTAssertTrue(true, "It should assert true")

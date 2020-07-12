@@ -1,4 +1,4 @@
-name: Characters
+name: Heroes
 
 options:
     bundleIdPrefix: me.alxyzhv
@@ -28,7 +28,7 @@ projectReferences:
         path: Core.xcodeproj
 
 targets:
-    CharactersApp:
+    HeroesApp:
         platform: iOS
         type: application
         sources: [App]
@@ -55,8 +55,8 @@ targets:
 
         settings:
             base:
-                PRODUCT_NAME: CharactersApp
-                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters
+                PRODUCT_NAME: HeroesApp
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.heroes
                 TARGETED_DEVICE_FAMILY: 1
 
     UnitTests:
@@ -64,23 +64,23 @@ targets:
         type: bundle.unit-test
         sources: [UnitTests]
         dependencies:
-            - target: CharactersApp
+            - target: HeroesApp
         scheme:
             testTargets:
                 - UnitTests
         settings:
             base:
-                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters.UnitTests
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.heroes.UnitTests
 
     UITests:
         platform: iOS
         type: bundle.ui-testing
         sources: [UITests]
         dependencies:
-            - target: CharactersApp
+            - target: HeroesApp
         scheme:
             testTargets:
                 - UITests
         settings:
             base:
-                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.characters.UITests
+                PRODUCT_BUNDLE_IDENTIFIER: me.alxyzhv.heroes.UITests

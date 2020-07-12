@@ -1,6 +1,6 @@
 import XCTest
 
-final class CharactersUITests: XCTestCase {
+final class HeroesUITests: XCTestCase {
 
     func testExample() throws {
         let app = XCUIApplication()
