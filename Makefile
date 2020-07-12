@@ -9,6 +9,7 @@ deps:
 .PHONY: projects # Генерирует .xcodeproj с помощью xcodegen
 projects:
 	.scripts/xcodegen/bin/xcodegen -s xcodegen/core.yml -r . -p .
+	.scripts/xcodegen/bin/xcodegen -s xcodegen/ui.yml -r . -p .
 	.scripts/xcodegen/bin/xcodegen -s xcodegen/project.yml -r . -p .
 
 .PHONY: clean # Удаляет DerivedData

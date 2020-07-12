@@ -26,6 +26,8 @@ settings:
 projectReferences:
     Core:
         path: Core.xcodeproj
+    UI:
+        path: UI.xcodeproj
 
 targets:
     HeroesApp:
@@ -34,6 +36,7 @@ targets:
         sources: [App]
         dependencies:
             - target: Core/Core
+            - target: UI/UI
 
         scheme:
             gatherCoverageData: true
