@@ -1,0 +1,16 @@
+name: UI
+
+options:
+    bundleIdPrefix: me.alxyzhv
+    groupSortPosition: top
+    usesTabs: false
+    indentWidth: 4
+    tabWidth: 4
+    deploymentTarget:
+        iOS: 13.0
+
+targets:
+    UI:
+        platform: iOS
+        type: library.static
+        sources: [UI]
