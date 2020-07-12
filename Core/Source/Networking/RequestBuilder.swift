@@ -18,6 +18,10 @@ final public class RequestBuilder: IRequestBuilder {
         var urlRequest = URLRequest(url: url)
         request.headers.forEach { urlRequest.addValue($0.key, forHTTPHeaderField: $0.value) }
 
+        if case .json = request.body {
+            urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        }
+
         do {
             urlRequest.httpBody = try request.body?.encode()
         } catch {
