@@ -5,11 +5,13 @@ final public class RequestPerformer: IRequestPerfomer {
 
     // MARK: - Properties
 
+    private let urlSession: URLSession
     private let requestBuilder: IRequestBuilder
 
     // MARK: - Initialization
 
-    public init(requestBuilder: IRequestBuilder) {
+    public init(urlSessionConfiguration: URLSessionConfiguration, requestBuilder: IRequestBuilder) {
+        self.urlSession = URLSession(configuration: urlSessionConfiguration)
         self.requestBuilder = requestBuilder
     }
 
@@ -23,7 +25,7 @@ final public class RequestPerformer: IRequestPerfomer {
 
         do {
             let urlRequest = try requestBuilder.build(from: request)
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
+            let dataTask = urlSession.dataTask(with: urlRequest) { data, _, error in
                 if let error = error {
                     return completion(.failure(NetworkingError.other(error)))
                 }
