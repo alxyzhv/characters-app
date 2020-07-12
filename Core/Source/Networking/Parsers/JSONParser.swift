@@ -1,15 +1,11 @@
 import Foundation
 
 /// Парсер для json
-public struct JsonParser<T: Decodable>: IParser {
-
-    // MARK: - Initialization
-
-    public init() {}
+struct JsonParser<T: Decodable>: IParser {
 
     // MARK: - IParser
 
-    public func parse(from data: Data) throws -> T {
+    func parse(from data: Data) throws -> T {
         let decoder = JSONDecoder()
         do {
             return try decoder.decode(T.self, from: data)
