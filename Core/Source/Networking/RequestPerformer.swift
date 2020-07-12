@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// Сущность для выполнения запросов
 final public class RequestPerformer: IRequestPerfomer {
@@ -44,5 +44,18 @@ final public class RequestPerformer: IRequestPerfomer {
         } catch {
             completion(.failure(error))
         }
+    }
+
+    public func loadData(from request: Request, completion: @escaping (Result<Data, Error>) -> Void) {
+        perform(request, use: DataParser(), completion: completion)
+    }
+
+    public func loadImage(from request: Request, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        perform(request, use: ImageParser(), completion: completion)
+    }
+
+    public func loadModel<Model: Decodable>(from request: Request,
+                                            completion: @escaping (Result<Model, Error>) -> Void) {
+        perform(request, use: JsonParser(), completion: completion)
     }
 }
