@@ -32,7 +32,7 @@ extension Hero {
 
         case genderless = "Genderless"
 
-        case unknown = "Unknown"
+        case unknown = "unknown"
     }
 
     enum Status: String, Decodable {
@@ -41,6 +41,6 @@ extension Hero {
 
         case dead = "Dead"
 
-        case unknown = "Unknown"
+        case unknown = "unknown"
     }
 }
