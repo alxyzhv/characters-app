@@ -1,15 +1,17 @@
-import Foundation
+import UIKit
 
 /// Сущность для выполнения запросов
 final public class RequestPerformer: IRequestPerfomer {
 
     // MARK: - Properties
 
+    private let urlSession: URLSession
     private let requestBuilder: IRequestBuilder
 
     // MARK: - Initialization
 
-    public init(requestBuilder: IRequestBuilder) {
+    public init(urlSessionConfiguration: URLSessionConfiguration, requestBuilder: IRequestBuilder) {
+        self.urlSession = URLSession(configuration: urlSessionConfiguration)
         self.requestBuilder = requestBuilder
     }
 
@@ -23,7 +25,7 @@ final public class RequestPerformer: IRequestPerfomer {
 
         do {
             let urlRequest = try requestBuilder.build(from: request)
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
+            let dataTask = urlSession.dataTask(with: urlRequest) { data, _, error in
                 if let error = error {
                     return completion(.failure(NetworkingError.other(error)))
                 }
@@ -42,5 +44,18 @@ final public class RequestPerformer: IRequestPerfomer {
         } catch {
             completion(.failure(error))
         }
+    }
+
+    public func loadData(from request: Request, completion: @escaping (Result<Data, Error>) -> Void) {
+        perform(request, use: DataParser(), completion: completion)
+    }
+
+    public func loadImage(from request: Request, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        perform(request, use: ImageParser(), completion: completion)
+    }
+
+    public func loadModel<Model: Decodable>(from request: Request,
+                                            completion: @escaping (Result<Model, Error>) -> Void) {
+        perform(request, use: JsonParser(), completion: completion)
     }
 }
