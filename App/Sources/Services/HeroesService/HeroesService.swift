@@ -17,7 +17,7 @@ final class HeroesService: IHeroesService {
 
     func getHeroes(from page: Int, completion: @escaping (Result<[Hero], Error>) -> Void) {
         let request = HeroesRequest.heroes(page: page)
-        requestPerformer.loadModel(from: request) { (result: Result<HeroesList, Error>) in
+        requestPerformer.loadModel(from: request) { (result: Result<HeroesResponse, Error>) in
             switch result {
             case .success(let response):
                 completion(.success(response.results))
