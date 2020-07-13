@@ -1,14 +1,14 @@
 import Foundation
 
 /// Парсер для json
-struct JsonParser<T: Decodable>: IParser {
+struct JsonParser<Model: Decodable>: IParser {
 
     // MARK: - IParser
 
-    func parse(from data: Data) throws -> T {
+    func parse(from data: Data) throws -> Model {
         let decoder = JSONDecoder()
         do {
-            return try decoder.decode(T.self, from: data)
+            return try decoder.decode(Model.self, from: data)
         } catch {
             throw NetworkingError.decodingFailed(error)
         }

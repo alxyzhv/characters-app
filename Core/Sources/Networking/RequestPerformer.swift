@@ -10,7 +10,8 @@ final public class RequestPerformer: IRequestPerfomer {
 
     // MARK: - Initialization
 
-    public init(urlSessionConfiguration: URLSessionConfiguration, requestBuilder: IRequestBuilder) {
+    public init(urlSessionConfiguration: URLSessionConfiguration = .default,
+                requestBuilder: IRequestBuilder = RequestBuilder()) {
         self.urlSession = URLSession(configuration: urlSessionConfiguration)
         self.requestBuilder = requestBuilder
     }
