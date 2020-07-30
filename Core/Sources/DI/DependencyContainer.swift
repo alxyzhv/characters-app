@@ -7,7 +7,9 @@ public class DependencyContainer: Container {
 
     // MARK: - Initialization
 
-    public init() {}
+    public init(assemblies: [Assembly] = []) {
+        assemblies.forEach { $0.assemble(container: self) }
+    }
 
     // MARK: - Container
 
