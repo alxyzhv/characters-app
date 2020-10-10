@@ -1,5 +1,8 @@
 name: UI
 
+include:
+    - settings.yml
+
 options:
     bundleIdPrefix: me.alxyzhv
     developmentLanguage: base
