@@ -1,5 +1,8 @@
 name: Heroes
 
+include:
+    - settings.yml
+
 options:
     bundleIdPrefix: me.alxyzhv
     developmentLanguage: ru
@@ -18,11 +21,6 @@ fileGroups:
     - Gemfile
     - Makefile
     - swiftgen.yml
-
-settings:
-    base:
-        CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
-
 
 projectReferences:
     Core:

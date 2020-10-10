@@ -1,5 +1,8 @@
 name: Core
 
+include:
+    - settings.yml
+
 options:
     bundleIdPrefix: me.alxyzhv
     developmentLanguage: base
